@@ -12,6 +12,7 @@ Contributors
 * Abir Mondal
 * Arnab Mukhopadyay
 * Debjoy Sarkar
+* Dipen Hore
 * Kingshuk Roy
 * Somak Bose
 
