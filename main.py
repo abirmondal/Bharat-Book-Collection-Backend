@@ -4,7 +4,35 @@ from fastapi.middleware.cors import CORSMiddleware
 from DBoperations import *
 
 
-app = FastAPI()
+description = '''
+This is the api docs page for Bharat Book Collection project.<br>
+It is a *B.Tech.* Project.
+
+Contributors
+* Abir Mondal
+* Arnab Mukhopadyay
+* Debjoy Sarkar
+* Kingshuk Roy
+* Somak Bose
+
+Links
+* [GitHub Repo Link](https://github.com/abirmondal/Bharat-Book-Collection-Backend)
+* [Frontend Repo Link]()
+'''
+
+tags_metadata = [
+    {
+        "name": "users",
+        "description": "Operations with users. The **login** and **signup** logic is also here.",
+    }
+]
+
+app = FastAPI(
+    title="Bharat Book Collection Backend",
+    description=description,
+    version="0.1.0",
+    openapi_tags=tags_metadata
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,6 +42,11 @@ app.add_middleware(
     allow_credentials=True,
 )
 
+from fastapi.responses import RedirectResponse
+@app.get("/", include_in_schema=False)
+async def docs_redirect():
+    response = RedirectResponse(url='/docs')
+    return response
 
 @app.post("/login/", tags=['users'])
 def loginAuth(username: str, password: str):
