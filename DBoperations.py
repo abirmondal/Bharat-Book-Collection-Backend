@@ -7,7 +7,14 @@ import bcrypt
 
 def checkUser(user, password):
     result = []
-    query = text("SELECT * FROM user_det WHERE username=:username;")
+    qStr = '''
+    SELECT user_id, username, password, email,
+    gender_name as gender, gender_symbol
+    FROM user_det as u, gender_det as g
+    WHERE u.username=:username
+    AND u.gender = g.g_id;
+    '''
+    query = text(qStr)
     with engine.connect() as con:
         try:
             rs = con.execute(query, {"username": user})
@@ -18,6 +25,7 @@ def checkUser(user, password):
                 encodedPassword = password.encode('ASCII')
                 if bcrypt.checkpw(encodedPassword, passHash):
                     result.append(userResult)
+                    result[0].pop('password')
             if len(result) == 0:
                 raise HTTPException(status_code=401, detail="Username or Password is incorrect!")
         except DatabaseError as ex:
