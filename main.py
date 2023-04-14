@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from fastapi.middleware.cors import CORSMiddleware
 from DBoperations import *
+from models import *
 
 
 description = '''
@@ -54,4 +55,6 @@ def loginAuth(username: str, password: str):
     return checkUser(username, password)
 
 
-
+@app.post("/signup/", tags=['users'])
+def loginAuth(user: UserDet):
+    return addUser(user)
