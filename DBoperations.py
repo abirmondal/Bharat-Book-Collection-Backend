@@ -93,3 +93,21 @@ def addUser(userDet):
             raise HTTPException(status_code=400, detail=str(ex.orig))
 
     return result
+
+
+def getAllUsersCSV():
+    result = []
+    qStr = '''
+    SELECT * FROM user_det;
+    '''
+    query = text(qStr)
+    with engine.connect() as con:
+        try:
+            rs = con.execute(query)
+            con.close()
+            for row in rs:
+                result.append(row)
+        except DatabaseError as ex:
+            raise HTTPException(status_code=400, detail=str(ex.orig))
+
+    return result
