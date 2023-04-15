@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 from fastapi.middleware.cors import CORSMiddleware
 from DBoperations import *
@@ -51,8 +51,8 @@ async def docs_redirect():
     return response
 
 @app.post("/login/", tags=['users'])
-def loginAuth(username: str, password: str):
-    return checkUser(username, password)
+def loginAuth(user: UserLogin):
+    return checkUser(user.username, user.password)
 
 
 @app.post("/signup/", tags=['users'])
