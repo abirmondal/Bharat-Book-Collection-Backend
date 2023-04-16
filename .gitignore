@@ -4,4 +4,6 @@ __pycache__
 .space
 csv files/user_det.csv
 csv files/updated_ratings.csv
-pickle files
+pickle files/*
+
+!pickle files/THIS FOLDER HAS NO FILES FOR SECURITY REASONS.txt
