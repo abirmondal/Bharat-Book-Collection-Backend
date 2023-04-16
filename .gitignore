@@ -4,3 +4,4 @@ __pycache__
 .space
 csv files/user_det.csv
 csv files/updated_ratings.csv
+pickle files
