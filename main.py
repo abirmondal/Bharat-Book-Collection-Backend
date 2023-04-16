@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from typing import Union
 from DBoperations import *
 from models import *
 from MLFunctions import *
@@ -45,7 +47,6 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-from fastapi.responses import RedirectResponse
 @app.get("/", include_in_schema=False)
 async def docs_redirect():
     response = RedirectResponse(url='/docs')
@@ -60,9 +61,8 @@ def loginAuth(user: UserLogin):
 def loginAuth(user: UserDet):
     return addUser(user)
 
-from typing import Union
 @app.get("/get-books/", tags=['recommend'])
-def getRecomBooks(page: int | None = None):
+def getRecomBooks(page: Union[int, None] = None):
     return getTopBooks()
 
 @app.get("/get-book-details/", tags=['recommend'])
