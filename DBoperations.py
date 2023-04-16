@@ -100,14 +100,16 @@ def getAllUsersCSV():
     qStr = '''
     SELECT * FROM user_det;
     '''
+    columns = []
     query = text(qStr)
     with engine.connect() as con:
         try:
             rs = con.execute(query)
             con.close()
+            columns.append(list(rs.keys()))
             for row in rs:
                 result.append(row)
         except DatabaseError as ex:
             raise HTTPException(status_code=400, detail=str(ex.orig))
 
-    return result
+    return columns[0], result
