@@ -60,6 +60,11 @@ def loginAuth(user: UserLogin):
 def loginAuth(user: UserDet):
     return addUser(user)
 
+from typing import Union
+@app.get("/get-books/", tags=['recommend'])
+def getRecomBooks(page: int | None = None):
+    return getTopBooks()
+
 @app.get("/get-book-details/", tags=['recommend'])
 def getBookDet(isbn: str):
     return getBookbyISBN(isbn)
