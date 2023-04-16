@@ -35,7 +35,7 @@ tags_metadata = [
 app = FastAPI(
     title="Bharat Book Collection Backend",
     description=description,
-    version="0.1.0",
+    version="2.0",
     openapi_tags=tags_metadata
 )
 
