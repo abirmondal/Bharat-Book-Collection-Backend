@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 
 from fastapi.middleware.cors import CORSMiddleware
 from DBoperations import *
 from models import *
+from MLFunctions import *
 
 
 description = '''
@@ -58,3 +59,7 @@ def loginAuth(user: UserLogin):
 @app.post("/signup/", tags=['users'])
 def loginAuth(user: UserDet):
     return addUser(user)
+
+@app.get("/get-book-details/", tags=['recommend'])
+def getBookDet(isbn: str):
+    return getBookbyISBN(isbn)
