@@ -12,7 +12,7 @@ description = '''
 This is the api docs page for Bharat Book Collection project.<br>
 It is a *B.Tech.* Project.
 
-Contributors
+### Contributors
 * Abir Mondal
 * Arnab Mukhopadyay
 * Debjoy Sarkar
@@ -20,15 +20,23 @@ Contributors
 * Kingshuk Roy
 * Somak Bose
 
-Links
+### Hosted Links
+* [Back-end](https://bbc-backend.onrender.com/)
+* [Front-end](https://roykingshuk.github.io/BBC-Frontend/)
+
+### Links
 * [GitHub Repo Link](https://github.com/abirmondal/Bharat-Book-Collection-Backend)
-* [Frontend Repo Link]()
+* [Frontend Repo Link](https://github.com/roykingshuk/BBC-Frontend)
 '''
 
 tags_metadata = [
     {
         "name": "users",
-        "description": "Operations with users. The **login** and **signup** logic is also here.",
+        "description": "Operations for users. The **login** and **signup** logic is also here."
+    },
+    {
+        "name": "books-recommend",
+        "description": "Operations to get **books details**, **related books** and **most popular books**."
     }
 ]
 
