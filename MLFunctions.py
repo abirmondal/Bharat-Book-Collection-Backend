@@ -6,9 +6,11 @@ def getBookbyISBN(isbn):
     data = pd.read_pickle('./pickle files/book_with_ratings.pkl')
     return data[data['ISBN'] == isbn].to_dict(orient="records")
 
-def getTopBooks(start = 0, end = 9):
+def getTopBooks(page = 1, perPage = 9):
+    start_limit = (page - 1) * perPage
+    end_limit = start_limit + perPage
     data = pd.read_pickle('./pickle files/popular_ratings.pkl')
-    return data.iloc[start:end].to_dict(orient="records")
+    return data.iloc[start_limit:end_limit].to_dict(orient="records")
 
 def getRecommendationByTitle(title):
     fileOpen = open('./pickle files/pt.pkl', "rb")
@@ -33,8 +35,3 @@ def getRecommendationByTitle(title):
         data.append(temp_df.to_dict(orient="records"))
 
     return data
-
-
-# print(getRecommendationByTitle('1984'))
-# print(getRecommendationByTitle('PLEADING GUILTY'))
-# getRecommendationByTitle('PLEADING GUILTY')

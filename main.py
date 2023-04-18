@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -69,9 +69,20 @@ def loginAuth(user: UserLogin):
 def loginAuth(user: UserDet):
     return addUser(user)
 
-@app.get("/get-books/", tags=['books-recommend'])
-def getTopBooks(page: Union[int, None] = None):
-    return getTopBooks()
+@app.get("/get-top-books/", tags=['books-recommend'])
+def getTopBooksList(page: Union[int, None] = None, perPage: Union[int, None] = None):
+    if page == None and perPage == None:
+        return getTopBooks()
+    elif page == None:
+        if perPage < 1:
+            raise HTTPException(status_code=400, detail="Books per page cannot be less than 1.")
+        return getTopBooks(perPage=perPage)
+    elif perPage == None:
+        if page < 1:
+            raise HTTPException(status_code=400, detail="Page number cannot be less than 1.")
+        return getTopBooks(page=page)
+    else:
+        return getTopBooks(page, perPage)
 
 @app.get("/get-book-details/", tags=['books-recommend'])
 def getBookDet(isbn: str):
