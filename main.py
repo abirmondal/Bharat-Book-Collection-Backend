@@ -86,11 +86,6 @@ def getTopBooksList(page: Union[int, None] = None, perPage: Union[int, None] = N
 
 @app.get("/get-book-details/", tags=['books-recommend'])
 def getBookDet(isbn: str, perPage: Union[int, None] = None):
-    bookDet = {}
-    bookDet['Book-Details'] = getBookbyISBN(isbn)
     perPage = perPage if perPage != None else 5
-    if len(bookDet['Book-Details']) == 0:
-        bookDet['Book-Recommendation'] = []
-    else:
-        bookDet['Book-Recommendation'] = getRecommendationByTitle(bookDet['Book-Details'][0]["Book-Title"], perPage)
-    return bookDet
+
+    return getBookDetAndRecommend(isbn, perPage)
