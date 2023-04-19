@@ -12,7 +12,7 @@ def getTopBooks(page = 1, perPage = 9):
     data = pd.read_pickle('./pickle files/popular_ratings.pkl')
     return data.iloc[start_limit:end_limit].to_dict(orient="records")
 
-def getRecommendationByTitle(title):
+def getRecommendationByTitle(title, perPage = 5):
     fileOpen = open('./pickle files/pt.pkl', "rb")
     pt = pickle.load(fileOpen)
     fileOpen = open('./pickle files/similarity_scores.pkl', "rb")
@@ -27,11 +27,12 @@ def getRecommendationByTitle(title):
         return data
     else:
         index = index[0]
-    similar_items = sorted(list(enumerate(similarity_scores[index])),key=lambda x:x[1],reverse=True)[1:4]
+    similar_items = sorted(list(enumerate(similarity_scores[index])),key=lambda x:x[1],reverse=True)[1:(perPage+1)]
 
     for i in similar_items:
         item = []
         temp_df = books[books['Book-Title'] == pt.index[i[0]]]
-        data.append(temp_df.to_dict(orient="records"))
+        temp_df_min = temp_df[['ISBN', 'Book-Title', 'Book-Author','Image-URL-L', 'Number of Ratings','Average Ratings']]
+        data.append(temp_df_min.to_dict(orient="records"))
 
     return data

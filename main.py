@@ -43,7 +43,7 @@ tags_metadata = [
 app = FastAPI(
     title="Bharat Book Collection Backend",
     description=description,
-    version="2.2",
+    version="2.3",
     openapi_tags=tags_metadata
 )
 
@@ -85,9 +85,12 @@ def getTopBooksList(page: Union[int, None] = None, perPage: Union[int, None] = N
         return getTopBooks(page, perPage)
 
 @app.get("/get-book-details/", tags=['books-recommend'])
-def getBookDet(isbn: str):
-    return getBookbyISBN(isbn)
-
-@app.get("/get-book-recommend/", tags=['books-recommend'])
-def getBookRecommend(title: str):
-    return getRecommendationByTitle(title)
+def getBookDet(isbn: str, perPage: Union[int, None] = None):
+    bookDet = {}
+    bookDet['Book-Details'] = getBookbyISBN(isbn)
+    perPage = perPage if perPage != None else 5
+    if len(bookDet['Book-Details']) == 0:
+        bookDet['Book-Recommendation'] = []
+    else:
+        bookDet['Book-Recommendation'] = getRecommendationByTitle(bookDet['Book-Details'][0]["Book-Title"], perPage)
+    return bookDet
