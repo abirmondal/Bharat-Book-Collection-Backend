@@ -1,5 +1,4 @@
 .venv
 .env
 __pycache__
-csv files/user_det.csv
-csv files/updated_ratings.csv
+csv files
