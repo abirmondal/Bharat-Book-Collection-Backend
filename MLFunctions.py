@@ -33,6 +33,6 @@ def getBookDetAndRecommend(isbn, perPage = 5):
     for i in similar_items:
         temp_df = books[books['Book-Title'] == pt.index[i[0]]]
         temp_df_min = temp_df[['ISBN', 'Book-Title', 'Book-Author','Image-URL-L', 'Number of Ratings','Average Ratings']]
-        data['Book-Recommendation'].append(temp_df_min.to_dict(orient="records"))
+        data['Book-Recommendation'].append(temp_df_min.to_dict(orient="records")[0])
 
     return data
