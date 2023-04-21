@@ -25,8 +25,8 @@ It is a *B.Tech.* Project.
 * [Front-end](https://roykingshuk.github.io/BBC-Frontend/)
 
 ### Links
-* [GitHub Repo Link](https://github.com/abirmondal/Bharat-Book-Collection-Backend)
-* [Frontend Repo Link](https://github.com/roykingshuk/BBC-Frontend)
+* [Back-end Repo Link](https://github.com/abirmondal/Bharat-Book-Collection-Backend)
+* [Front-end Repo Link](https://github.com/roykingshuk/BBC-Frontend)
 '''
 
 tags_metadata = [
